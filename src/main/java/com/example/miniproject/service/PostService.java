@@ -6,7 +6,9 @@ import com.example.miniproject.controller.response.GetAllPostResponseDto;
 import com.example.miniproject.controller.response.ImageResponseDto;
 import com.example.miniproject.controller.response.PostResponseDto;
 import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.domain.Member;
 import com.example.miniproject.domain.Post;
+import com.example.miniproject.jwt.TokenProvider;
 import com.example.miniproject.repository.ImageRepository;
 import com.example.miniproject.repository.PostLikesRepository;
 import com.example.miniproject.repository.PostRepository;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,8 @@ public class PostService {
     private final FileUploadService fileUploadService;
     private final ImageRepository imageRepository;
     private final PostLikesRepository postLikesRepository;
-    
+    private final TokenProvider tokenProvider;
+
     // 게시글 작성
     @Transactional
     public ResponseDto<?> createPost(PostRequestDto requestDto, MultipartFile multipartFile, HttpServletRequest request) {

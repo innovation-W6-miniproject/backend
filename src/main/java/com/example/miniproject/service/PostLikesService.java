@@ -2,8 +2,10 @@ package com.example.miniproject.service;
 
 import com.example.miniproject.controller.request.PostLikesRequestDto;
 import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.domain.Member;
 import com.example.miniproject.domain.Post;
 import com.example.miniproject.domain.PostLikes;
+import com.example.miniproject.jwt.TokenProvider;
 import com.example.miniproject.repository.PostLikesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ public class PostLikesService {
 
     private final PostService postService;
     private final PostLikesRepository postLikesRepository;
+    private final TokenProvider tokenProvider;
 
     @Transactional
     public ResponseDto<?> createPostLikes(PostLikesRequestDto requestDto, HttpServletRequest request) {

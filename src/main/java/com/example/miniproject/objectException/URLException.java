@@ -2,6 +2,7 @@ package com.example.miniproject.objectException;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public class URLException {
 

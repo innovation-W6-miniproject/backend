@@ -1,5 +1,6 @@
 package com.example.miniproject.repository;
 
+import com.example.miniproject.domain.Member;
 import com.example.miniproject.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
