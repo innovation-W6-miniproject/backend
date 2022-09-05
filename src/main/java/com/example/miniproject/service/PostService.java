@@ -61,22 +61,24 @@ public class PostService {
 
         assert imageResponseDto != null;
         Post post = Post.builder()
+                .member(member)
                 .productUrl(requestDto.getProductUrl())
+                .productName(requestDto.getProductName())
                 .star(requestDto.getStar())
                 .content(requestDto.getContent())
-                .imageUrl(requestDto.getImageUrl())
+                .imageUrl(FileName)
                 .build();
         postRepository.save(post);
 
         return ResponseDto.success(
                 PostResponseDto.builder()
                         .id(post.getId())
-                        .nickname(post.getNickname())
+                        .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
                         .star(post.getStar())
                         .content(post.getContent())
-                        .imageUrl(post.getImageUrl())
+                        .imageUrl(FileName)
                         .likes(post.getLikes())
                         .createdAt(post.getCreatedAt())
                         .modifiedAt(post.getModifiedAt())
@@ -176,6 +178,7 @@ public class PostService {
                 PostResponseDto.builder()
                         .id(post.getId())
                         .productUrl(post.getProductUrl())
+                        .productName(post.getProductName())
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
