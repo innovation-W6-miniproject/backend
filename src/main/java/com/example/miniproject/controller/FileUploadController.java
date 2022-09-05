@@ -1,8 +1,8 @@
 package com.example.miniproject.controller;
 
 
-import com.example.miniproject.controller.response.ImageResponseDto;
-import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.dto.response.ImageResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.service.FileUploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

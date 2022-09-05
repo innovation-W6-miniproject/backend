@@ -1,8 +1,8 @@
 package com.example.miniproject.controller;
 
 
-import com.example.miniproject.controller.request.PostRequestDto;
-import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.dto.request.PostRequestDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +30,13 @@ public class PostController {
     }
 
     // 게시글 전체조회
-    @GetMapping(value = "/api/auth/post/{postId}")
+    @GetMapping(value = "/api/post")
     public ResponseDto<?> getAllPosts(){
         return postService.getAllPosts();
     }
 
     // 게시글 수정
-    @PutMapping(value = "/api/auth/post/{postid}")
+    @PutMapping(value = "/api/auth/post/{id}")
     public ResponseDto<?> updatePost(@PathVariable Long id, @RequestPart PostRequestDto requestDto, @RequestPart MultipartFile multipartFile, HttpServletRequest request) {
         return postService.updatePost(id, requestDto, multipartFile, request);
     }

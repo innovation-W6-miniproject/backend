@@ -1,11 +1,11 @@
 package com.example.miniproject.service;
 
 
-import com.example.miniproject.controller.request.PostRequestDto;
-import com.example.miniproject.controller.response.GetAllPostResponseDto;
-import com.example.miniproject.controller.response.ImageResponseDto;
-import com.example.miniproject.controller.response.PostResponseDto;
-import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.dto.request.PostRequestDto;
+import com.example.miniproject.dto.response.GetAllPostResponseDto;
+import com.example.miniproject.dto.response.ImageResponseDto;
+import com.example.miniproject.dto.response.PostResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.domain.Member;
 import com.example.miniproject.domain.Post;
 import com.example.miniproject.jwt.TokenProvider;
