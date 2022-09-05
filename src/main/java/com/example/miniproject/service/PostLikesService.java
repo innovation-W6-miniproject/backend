@@ -1,6 +1,5 @@
 package com.example.miniproject.service;
 
-import com.example.miniproject.dto.request.PostLikesRequestDto;
 import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.domain.Member;
 import com.example.miniproject.domain.Post;
@@ -22,14 +21,13 @@ public class PostLikesService {
     private final TokenProvider tokenProvider;
 
     @Transactional
-    public ResponseDto<?> createPostLikes(PostLikesRequestDto requestDto, HttpServletRequest request) {
+    public ResponseDto<?> togglePostLikes(Long postId, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
         }
 
         if (null == request.getHeader("Authorization")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
+            return ResponseDto.fail("MEMBER_NOT_FOUND","로그인이 필요합니다.");
         }
 
         Member member = validateMember(request);
@@ -37,23 +35,34 @@ public class PostLikesService {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
 
-        Post post = postService.isPresentPost(requestDto.getId());
+        Post post = postService.isPresentPost(postId);
         if (null == post) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
-        PostLikes findPostLikes = postLikesRepository.findByPostIdAndMemberId(post.getId(), member.getId());
-        if ( null != findPostLikes ) {
-            postLikesRepository.delete(findPostLikes);
-            return  ResponseDto.success("좋아요 취소");
+        PostLikes checkLike = postLikesRepository.findByPostIdAndMemberId(post.getId(), member.getId());
+        if (checkLike == null) {
+            // like 등록
+            PostLikes likePost = PostLikes.builder()
+                    .member(member)
+                    .post(post)
+                    .build();
+            postLikesRepository.save(likePost);
+        } else {
+            //like 취소
+            postLikesRepository.deleteById(checkLike.getId());
         }
 
-        PostLikes postLikes = PostLikes.builder()
-                .member(member)
-                .post(post)
-                .build();
-        postLikesRepository.save(postLikes);
-            return  ResponseDto.success("좋아요 완료");
+        // 해당 게시물 likes 업데이트
+        Long likes = postLikesRepository.countAllByPostId(post.getId());
+        post.updateLikes(likes);
+
+        if (checkLike == null) {
+            return ResponseDto.success("like post success");
+        } else {
+            return ResponseDto.success("like post cancel");
+        }
+
     }
 
     @Transactional

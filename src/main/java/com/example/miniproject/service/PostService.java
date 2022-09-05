@@ -66,6 +66,7 @@ public class PostService {
                 .productName(requestDto.getProductName())
                 .star(requestDto.getStar())
                 .content(requestDto.getContent())
+                .likes(0L)
                 .imageUrl(FileName)
                 .build();
         postRepository.save(post);
@@ -93,7 +94,6 @@ public class PostService {
         if(null == post) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
-        Long likes = postLikesRepository.countAllByPostId(post.getId());
 
         return ResponseDto.success(
                 PostResponseDto.builder()
@@ -104,7 +104,7 @@ public class PostService {
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
-                        .likes(likes)
+                        .likes(post.getLikes())
                         .createdAt(post.getCreatedAt())
                         .modifiedAt(post.getModifiedAt())
                         .build()
@@ -125,7 +125,7 @@ public class PostService {
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
                         .star(post.getStar())
-                        .likes(postLikesRepository.countAllByPostId(post.getId()))
+                        .likes(post.getLikes())
                         .build()
             );
         }
@@ -182,7 +182,7 @@ public class PostService {
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
-                        .likes(postLikesRepository.countAllByPostId(post.getId()))
+                        .likes(post.getLikes())
                         .build()
         );
     }

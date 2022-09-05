@@ -25,4 +25,8 @@ public class PostLikes {
     @JoinColumn(name = "post_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
+
+    public boolean validateMember(Member member) {
+        return !this.member.equals(member);
+    }
 }
