@@ -48,7 +48,7 @@ public class MyPageService {
             postResponseDtoList.add(
                     MyPagePostResponseDto.builder()
                             .id(post.getId())
-                            .nickname(post.getNickname())
+                            .nickname(post.getMember().getNickname())
                             .productUrl(post.getProductUrl())
                             .productName(post.getProductName())
                             .star(post.getStar())
@@ -103,7 +103,7 @@ public class MyPageService {
             myPagePostLikesResponseDtoList.add(
                     MyPagePostLikesResponseDto.builder()
                             .id(postLikes.getPost().getId())
-                            .nickname(postLikes.getPost().getNickname())
+                            .nickname(postLikes.getPost().getMember().getNickname())
                             .productUrl(postLikes.getPost().getProductUrl())
                             .productName(postLikes.getPost().getProductName())
                             .star(postLikes.getPost().getStar())
