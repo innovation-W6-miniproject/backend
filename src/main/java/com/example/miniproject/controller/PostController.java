@@ -30,13 +30,13 @@ public class PostController {
     }
 
     // 게시글 전체조회
-    @GetMapping(value = "/api/auth/post/{postId}")
+    @GetMapping(value = "/api/post")
     public ResponseDto<?> getAllPosts(){
         return postService.getAllPosts();
     }
 
     // 게시글 수정
-    @PutMapping(value = "/api/auth/post/{postid}")
+    @PutMapping(value = "/api/auth/post/{id}")
     public ResponseDto<?> updatePost(@PathVariable Long id, @RequestPart PostRequestDto requestDto, @RequestPart MultipartFile multipartFile, HttpServletRequest request) {
         return postService.updatePost(id, requestDto, multipartFile, request);
     }
