@@ -21,7 +21,7 @@ public class MemberController {
 
     @PostMapping("api/member/signup")
     public ResponseDto<?> signup (@RequestBody @Valid MemberRequestDto requestDto) {
-        return memberService.createMember(requestDto);
+        return memberService.signup(requestDto);
     }
 
     @PostMapping("api/member/login")

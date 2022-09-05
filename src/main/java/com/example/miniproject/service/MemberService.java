@@ -25,7 +25,7 @@ public class MemberService {
 
 
     @Transactional
-    public ResponseDto<?> createMember(MemberRequestDto requestDto) {
+    public ResponseDto<?> signup(MemberRequestDto requestDto) {
         if (null != isPresentMember(requestDto.getUserId())) {
             return ResponseDto.fail("DUPLICATED_USERID","중복된 아이디 입니다.");
         }

@@ -30,7 +30,7 @@ public class PostController {
     }
 
     // 게시글 전체조회
-    @GetMapping(value = "/api/auth/post/{postId}")
+    @GetMapping(value = "/api/auth/post/{postid}")
     public ResponseDto<?> getAllPosts(){
         return postService.getAllPosts();
     }

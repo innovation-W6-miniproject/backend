@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class PostRequestDto {
 
     private String productUrl;
+    private String productName;
     private Integer star;
     private String content;
     private String imageUrl;
