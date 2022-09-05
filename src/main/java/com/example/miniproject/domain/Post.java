@@ -2,6 +2,7 @@ package com.example.miniproject.domain;
 
 import com.example.miniproject.dto.request.PostRequestDto;
 import com.example.miniproject.dto.response.ImageResponseDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,7 +34,7 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column
     private String imageUrl;
 
     @Column(nullable = true)
@@ -44,11 +45,14 @@ public class Post extends Timestamped{
     private Member member;
     // cascade = CascadeType.ALL 상위 엔티티에서 하위 엔티티로 모든 작업을 전파
     // orphanRemoval = true 부모가 삭제되면 자식도 함께 삭제, 관계가 끊어진 자식을 자동 제거
+
+    @JsonIgnore
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostLikes> postLikes;
 
     public void update(PostRequestDto postRequestDto, ImageResponseDto imageResponseDto) {
         this.productUrl = postRequestDto.getProductUrl();
+        this.productName = postRequestDto.getProductName();
         this.star = postRequestDto.getStar();
         this.content = postRequestDto.getContent();
         this.imageUrl = imageResponseDto.getImageUrl();
@@ -56,6 +60,10 @@ public class Post extends Timestamped{
 
     public boolean validateMember(Member member) {
         return !this.member.equals(member);
+    }
+
+    public void updateLikes(Long likes) {
+        this.likes = likes;
     }
 
 }
