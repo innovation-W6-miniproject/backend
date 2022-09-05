@@ -1,7 +1,7 @@
 package com.example.miniproject.controller;
 
-import com.example.miniproject.dto.LoginRequestDto;
-import com.example.miniproject.dto.MemberRequestDto;
+import com.example.miniproject.dto.request.LoginRequestDto;
+import com.example.miniproject.dto.request.MemberRequestDto;
 import com.example.miniproject.dto.ResponseDto;
 import com.example.miniproject.service.MemberService;
 import lombok.RequiredArgsConstructor;

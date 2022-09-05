@@ -1,8 +1,8 @@
 package com.example.miniproject.controller;
 
 
-import com.example.miniproject.controller.request.PostRequestDto;
-import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.dto.request.PostRequestDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

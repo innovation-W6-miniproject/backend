@@ -1,7 +1,7 @@
 package com.example.miniproject.domain;
 
-import com.example.miniproject.controller.request.PostRequestDto;
-import com.example.miniproject.controller.response.ImageResponseDto;
+import com.example.miniproject.dto.request.PostRequestDto;
+import com.example.miniproject.dto.response.ImageResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

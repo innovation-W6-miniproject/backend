@@ -1,7 +1,7 @@
 package com.example.miniproject.service;
 
-import com.example.miniproject.controller.request.PostLikesRequestDto;
-import com.example.miniproject.controller.response.ResponseDto;
+import com.example.miniproject.dto.request.PostLikesRequestDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.domain.Member;
 import com.example.miniproject.domain.Post;
 import com.example.miniproject.domain.PostLikes;

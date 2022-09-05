@@ -1,8 +1,7 @@
 package com.example.miniproject.controller;
 
-import com.example.miniproject.controller.request.PostLikesRequestDto;
-import com.example.miniproject.controller.response.ResponseDto;
-import com.example.miniproject.domain.PostLikes;
+import com.example.miniproject.dto.request.PostLikesRequestDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.service.PostLikesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

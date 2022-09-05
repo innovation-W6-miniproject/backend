@@ -1,4 +1,4 @@
-package com.example.miniproject.controller.response;
+package com.example.miniproject.dto.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
