@@ -22,16 +22,13 @@ public class Post extends Timestamped{
     private Long id;
 
     @Column(nullable = false)
-    private String nickname;
-
-    @Column(nullable = false)
     private String productUrl;
 
     @Column(nullable = false)
-    private  Integer star;
+    private String productName;
 
     @Column(nullable = false)
-    private String productName;
+    private Integer star;
 
     @Column(nullable = false)
     private String content;
