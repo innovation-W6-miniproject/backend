@@ -2,8 +2,10 @@ package com.example.miniproject.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@EnableWebMvc
 @Configuration
 public class CorsConfiguration implements WebMvcConfigurer {
     // cors 정책에서 벗어나기 위한 구성
