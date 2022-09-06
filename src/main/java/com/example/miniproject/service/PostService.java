@@ -177,12 +177,15 @@ public class PostService {
         return ResponseDto.success(
                 PostResponseDto.builder()
                         .id(post.getId())
+                        .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
                         .likes(postLikesRepository.countAllByPostId(post.getId()))
+                        .createdAt(post.getCreatedAt())
+                        .modifiedAt(post.getModifiedAt())
                         .build()
         );
     }

@@ -49,6 +49,7 @@ public class Post extends Timestamped{
 
     public void update(PostRequestDto postRequestDto, ImageResponseDto imageResponseDto) {
         this.productUrl = postRequestDto.getProductUrl();
+        this.productName = postRequestDto.getProductName();
         this.star = postRequestDto.getStar();
         this.content = postRequestDto.getContent();
         this.imageUrl = imageResponseDto.getImageUrl();
