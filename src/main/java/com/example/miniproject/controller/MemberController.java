@@ -34,4 +34,16 @@ public class MemberController {
         return memberService.logout(request);
     }
 
+
+    @PostMapping("api/member/checkId")
+    public boolean duplicatedId(@RequestBody MemberRequestDto requestDto) {
+        return memberService.checkId(requestDto);
+    }
+
+
+    @PostMapping("api/member/checkNickname")
+    public boolean duplicatedNickname(@RequestBody MemberRequestDto requestDto) {
+        return memberService.checkNickname(requestDto);
+    }
+
 }

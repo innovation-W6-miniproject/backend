@@ -101,6 +101,16 @@ public class MemberService {
     }
 
 
+    public boolean checkId(MemberRequestDto memberRequestDto) {
+        String userId = memberRequestDto.getUserId();
+        return !memberRepository.findByUserId(userId).isPresent();//userid와 같은게 있는지 리파지토리에서 찾아보고, isPresent() 이게 있냐 없냐를 확인, ! = 있으면 false
+    }
+
+    public boolean checkNickname(MemberRequestDto memberRequestDto) {
+        String nickname = memberRequestDto.getNickname();
+        return !memberRepository.findByNickname(nickname).isPresent();
+    }
+
     @Transactional(readOnly = true)
     public Member isPresentMember(String userId) {
         Optional<Member> optionalMember = memberRepository.findByUserId(userId);
