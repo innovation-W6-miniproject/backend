@@ -12,12 +12,16 @@ import com.example.miniproject.repository.ImageRepository;
 import com.example.miniproject.repository.PostLikesRepository;
 import com.example.miniproject.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -57,12 +61,27 @@ public class PostService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         assert imageResponseDto != null;
+
+        //crawling
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(requestDto.getProductUrl()).get();    //Document에는 페이지의 전체 소스가 저장된다
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert doc != null;
+        String img = Objects.requireNonNull(doc.select("meta[property^=og:image]").first()).attr("content");
+        String title = doc.select("tbody tr td strong[class=color_2a line_h140]").text();
+        String title2 = doc.select("div dl dt div[class=lowview_title_text]").text();
+        String crwResult = (title.isBlank()) ? title2 : title;
+
+
         Post post = Post.builder()
                 .member(member)
                 .productUrl(requestDto.getProductUrl())
-                .productName(requestDto.getProductName())
+                .productName(crwResult)
+                .productImg(img)
                 .star(requestDto.getStar())
                 .content(requestDto.getContent())
                 .likes(0L)
@@ -76,9 +95,10 @@ public class PostService {
                         .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
+                        .productImg(post.getProductImg())
                         .star(post.getStar())
                         .content(post.getContent())
-                        .imageUrl(FileName)
+                        .imageUrl(post.getImageUrl())
                         .likes(post.getLikes())
                         .createdAt(post.getCreatedAt())
                         .modifiedAt(post.getModifiedAt())
@@ -100,6 +120,7 @@ public class PostService {
                         .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
+                        .productImg(post.getProductImg())
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
@@ -124,6 +145,7 @@ public class PostService {
                         .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
+                        .productImg(post.getProductImg())
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
@@ -176,13 +198,14 @@ public class PostService {
         }
 
         assert imageResponseDto != null;
-        post.update(requestDto, imageResponseDto);
+        post.update(requestDto,imageResponseDto);
 
         return ResponseDto.success(
                 PostResponseDto.builder()
                         .id(post.getId())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
+                        .productImg(post.getProductImg())
                         .star(post.getStar())
                         .content(post.getContent())
                         .imageUrl(post.getImageUrl())
