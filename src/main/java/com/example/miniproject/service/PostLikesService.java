@@ -58,9 +58,9 @@ public class PostLikesService {
         post.updateLikes(likes);
 
         if (checkLike == null) {
-            return ResponseDto.success("like post success");
+            return ResponseDto.success(true);
         } else {
-            return ResponseDto.success("like post cancel");
+            return ResponseDto.success(false);
         }
 
     }
