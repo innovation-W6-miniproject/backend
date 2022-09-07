@@ -53,11 +53,13 @@ public class Post extends Timestamped{
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostLikes> postLikes;
 
-    public void update(PostRequestDto postRequestDto, ImageResponseDto imageResponseDto) {
+    public void update(PostRequestDto postRequestDto, ImageResponseDto imageResponseDto, String img, String crwResult) {
         this.productUrl = postRequestDto.getProductUrl();
         this.star = postRequestDto.getStar();
         this.content = postRequestDto.getContent();
         this.imageUrl = imageResponseDto.getImageUrl();
+        this.productImg = img;
+        this.productName = crwResult;
     }
 
     public boolean validateMember(Member member) {

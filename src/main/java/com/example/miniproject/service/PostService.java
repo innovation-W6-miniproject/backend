@@ -198,11 +198,26 @@ public class PostService {
         }
 
         assert imageResponseDto != null;
-        post.update(requestDto,imageResponseDto);
+
+        //crawling
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(requestDto.getProductUrl()).get();    //Document에는 페이지의 전체 소스가 저장된다
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert doc != null;
+        String img = Objects.requireNonNull(doc.select("meta[property^=og:image]").first()).attr("content");
+        String title = doc.select("tbody tr td strong[class=color_2a line_h140]").text();
+        String title2 = doc.select("div dl dt div[class=lowview_title_text]").text();
+        String crwResult = (title.isBlank()) ? title2 : title;
+
+        post.update(requestDto, imageResponseDto, img, crwResult);
 
         return ResponseDto.success(
                 PostResponseDto.builder()
                         .id(post.getId())
+                        .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
                         .productImg(post.getProductImg())
@@ -213,7 +228,7 @@ public class PostService {
                         .build()
         );
     }
-    @Transactional
+
     public ResponseDto<?> deletePost(Long id, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
