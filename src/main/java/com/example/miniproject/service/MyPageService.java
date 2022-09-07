@@ -6,6 +6,7 @@ import com.example.miniproject.domain.PostLikes;
 import com.example.miniproject.dto.*;
 import com.example.miniproject.dto.response.MyPagePostLikesResponseDto;
 import com.example.miniproject.dto.response.MyPagePostResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.jwt.TokenProvider;
 import com.example.miniproject.repository.PostLikesRepository;
 import com.example.miniproject.repository.PostRepository;
@@ -27,7 +28,7 @@ public class MyPageService {
 
 
     @Transactional
-    public ResponseDto<MyPageDto> getMyPost(HttpServletRequest request){
+    public ResponseDto<?> getMyPost(HttpServletRequest request){
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "로그인이 필요합니다.");

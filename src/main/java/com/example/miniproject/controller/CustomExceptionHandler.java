@@ -1,6 +1,6 @@
 package com.example.miniproject.controller;
 
-import com.example.miniproject.dto.ResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

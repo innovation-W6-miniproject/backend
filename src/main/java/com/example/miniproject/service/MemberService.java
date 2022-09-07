@@ -5,6 +5,7 @@ import com.example.miniproject.dto.*;
 import com.example.miniproject.dto.request.LoginRequestDto;
 import com.example.miniproject.dto.request.MemberRequestDto;
 import com.example.miniproject.dto.response.MemberResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.jwt.TokenProvider;
 import com.example.miniproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

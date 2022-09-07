@@ -1,7 +1,7 @@
 package com.example.miniproject.controller;
 
 
-import com.example.miniproject.dto.ResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
 package com.example.miniproject.jwt;
 
-import com.example.miniproject.dto.ResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.example.miniproject.service.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;

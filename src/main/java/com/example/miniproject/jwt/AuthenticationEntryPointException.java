@@ -1,6 +1,6 @@
 package com.example.miniproject.jwt;
 
-import com.example.miniproject.dto.ResponseDto;
+import com.example.miniproject.dto.response.ResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
