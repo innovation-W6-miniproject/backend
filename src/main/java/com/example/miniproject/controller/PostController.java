@@ -25,8 +25,8 @@ public class PostController {
 
     // 게시글 상세조회
     @GetMapping(value = "/api/post/{id}")
-    public ResponseDto<?> getPost(@PathVariable Long id) {
-        return postService.getPost(id);
+    public ResponseDto<?> getPost(@PathVariable Long id, HttpServletRequest request) {
+        return postService.getPost(id, request);
     }
 
     // 게시글 전체조회

@@ -23,4 +23,5 @@ public class PostResponseDto {
     private Long likes;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private boolean checkLike;
 }

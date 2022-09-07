@@ -43,11 +43,11 @@ public class PostLikesService {
         PostLikes checkLike = postLikesRepository.findByPostIdAndMemberId(post.getId(), member.getId());
         if (checkLike == null) {
             // like 등록
-            PostLikes likePost = PostLikes.builder()
+            PostLikes postLikes = PostLikes.builder()
                     .member(member)
                     .post(post)
                     .build();
-            postLikesRepository.save(likePost);
+            postLikesRepository.save(postLikes);
         } else {
             //like 취소
             postLikesRepository.deleteById(checkLike.getId());

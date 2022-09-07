@@ -26,6 +26,9 @@ public class PostLikes {
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
+    @JoinColumn
+    private String checkLike;
+
     public boolean validateMember(Member member) {
         return !this.member.equals(member);
     }

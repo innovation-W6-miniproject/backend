@@ -1,6 +1,7 @@
 package com.example.miniproject.service;
 
 
+import com.example.miniproject.domain.PostLikes;
 import com.example.miniproject.dto.request.PostRequestDto;
 import com.example.miniproject.dto.response.ImageResponseDto;
 import com.example.miniproject.dto.response.PostResponseDto;
@@ -108,11 +109,18 @@ public class PostService {
     
     // 게시글 상세조회
     @Transactional(readOnly = true)
-    public ResponseDto<?> getPost(Long id) {
+    public ResponseDto<?> getPost(Long id, HttpServletRequest request) {
         Post post = isPresentPost(id);
         if(null == post) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
+        Member member = validateMember(request);
+        if (null == member) {
+            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+        }
+
+        boolean checkLike = checkLikeMember(post.getMember());
+
 
         return ResponseDto.success(
                 PostResponseDto.builder()
@@ -127,6 +135,7 @@ public class PostService {
                         .likes(post.getLikes())
                         .createdAt(post.getCreatedAt())
                         .modifiedAt(post.getModifiedAt())
+                        .checkLike(checkLike)
                         .build()
         );
     }
@@ -272,7 +281,13 @@ public class PostService {
         return tokenProvider.getMemberFromAuthentication();
     }
 
-
+    public boolean checkLikeMember (Member member){
+        List<PostLikes> postLikesList = postLikesRepository.findByMember(member);
+        if(postLikesList.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 
 
 }
