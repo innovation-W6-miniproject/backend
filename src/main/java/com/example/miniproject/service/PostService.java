@@ -119,7 +119,7 @@ public class PostService {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
 
-        boolean checkLike = checkLikeMember(post.getMember());
+        boolean checkLike = checkLikeMember(post.getId(), member.getId());
 
 
         return ResponseDto.success(
@@ -281,9 +281,9 @@ public class PostService {
         return tokenProvider.getMemberFromAuthentication();
     }
 
-    public boolean checkLikeMember (Member member){
-        List<PostLikes> postLikesList = postLikesRepository.findByMember(member);
-        if(postLikesList.isEmpty()){
+    public boolean checkLikeMember (Long postId, Long memberId){
+        PostLikes postLikes = postLikesRepository.findByPostIdAndMemberId(postId,memberId);
+        if(postLikes == null){
             return false;
         }
         return true;
