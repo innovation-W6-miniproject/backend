@@ -2,7 +2,6 @@ package com.example.miniproject.service;
 
 
 import com.example.miniproject.dto.request.PostRequestDto;
-import com.example.miniproject.dto.response.GetAllPostResponseDto;
 import com.example.miniproject.dto.response.ImageResponseDto;
 import com.example.miniproject.dto.response.PostResponseDto;
 import com.example.miniproject.dto.response.ResponseDto;
@@ -116,20 +115,25 @@ public class PostService {
     public ResponseDto<?> getAllPosts() {
 
         List<Post> allPosts = postRepository.findAllByOrderByModifiedAtDesc();
-        List<GetAllPostResponseDto> getAllPostResponseDtoList = new ArrayList<>();
+        List<PostResponseDto> postResponseDtoList = new ArrayList<>();
 
         for (Post post : allPosts) {
-            getAllPostResponseDtoList.add(
-                GetAllPostResponseDto.builder()
+            postResponseDtoList.add(
+                PostResponseDto.builder()
                         .id(post.getId())
+                        .nickname(post.getMember().getNickname())
                         .productUrl(post.getProductUrl())
                         .productName(post.getProductName())
                         .star(post.getStar())
+                        .content(post.getContent())
+                        .imageUrl(post.getImageUrl())
                         .likes(post.getLikes())
+                        .createdAt(post.getCreatedAt())
+                        .modifiedAt(post.getModifiedAt())
                         .build()
             );
         }
-        return ResponseDto.success(getAllPostResponseDtoList);
+        return ResponseDto.success(postResponseDtoList);
     }
 
     @Transactional
