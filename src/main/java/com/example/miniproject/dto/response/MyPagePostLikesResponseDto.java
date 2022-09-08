@@ -16,6 +16,7 @@ public class MyPagePostLikesResponseDto {
     private String nickname;
     private String productUrl;
     private String productName;
+    private String productImg;
     private Integer star;
     private String content;
     private String imageUrl;
